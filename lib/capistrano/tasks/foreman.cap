@@ -20,7 +20,7 @@ namespace :foreman do
   task :start do
     on roles(:app) do |host|
       as :root do
-        execute :start, fetch(:application)
+        execute :start, fetch(:foreman_service_name, fetch(:application))
       end
     end
   end
@@ -29,7 +29,7 @@ namespace :foreman do
   task :stop do
     on roles(:app) do |host|
       as :root do
-        execute :stop, fetch(:application)
+        execute :stop, fetch(:foreman_service_name, fetch(:application))
       end
     end
   end
@@ -38,7 +38,8 @@ namespace :foreman do
   task :restart do
     on roles(:app) do |host|
       as :root do
-        execute :service, "#{fetch(:application)} start || service #{fetch(:application)} restart"
+        service_name = fetch(:foreman_service_name, fetch(:application))
+        execute :service, "#{service_name} start || service #{service_name} restart"
       end
     end
   end
