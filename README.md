@@ -46,6 +46,18 @@ Custom ENVIRONMENT variables for foreman [(see here)](http://ddollar.github.io/f
 
     set :foreman_env,  '/remote/path/to/your.env'         # Default none 
 
+Custom location for the target upstart configuration files (defaults to `/etc/init`):
+
+    set :foreman_location, '/etc/init/my-application'
+
+Use other user than `root` (the default) to run `bundle exec foreman export` when the `foreman:export` task is invoked:
+
+    set :foreman_export_user, 'my_user'
+
+Specify the name of the service using `foreman_service_name`:
+
+    set :foreman_service_name, 'my/application'
+
 
 ##The Twelve Factor App##
 
